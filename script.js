@@ -88,47 +88,38 @@ async function startCamera() {
         return;
     }
 
-    if (!navigator.mediaDevices ||
-        !navigator.mediaDevices.getUserMedia) {
-
-        notify("Camera is not supported by this browser.");
-
-        return;
-    }
-
     try {
 
+        // Stop previous camera
+        if (cameraStream) {
+            cameraStream.getTracks().forEach(track => track.stop());
+        }
+
+        // Try rear camera first
         cameraStream = await navigator.mediaDevices.getUserMedia({
-
             video: {
-                facingMode: "user",
-
+                facingMode: {
+                    ideal: "environment"
+                },
                 width: {
                     ideal: 1920
                 },
-
                 height: {
                     ideal: 1080
                 }
             },
-
             audio: false
-
         });
 
         video.srcObject = cameraStream;
 
-        await video.play();
-
-        console.log("Web camera started");
-
-        notify("Camera ready");
+        console.log("Rear camera started");
 
     } catch (error) {
 
         console.error("Camera error:", error);
 
-        notify(
+        showToast(
             "Camera access denied. Please allow camera permission."
         );
     }
