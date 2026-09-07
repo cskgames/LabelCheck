@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LabelCheck — Legal Metrology Compliance</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-mark">✓</div>
+
+                <div>
+                    <strong>LabelCheck</strong>
+                    <span>Legal Metrology AI</span>
+                </div>
+            </div>
+
+            <nav>
+
+                <button class="nav-item active" data-page="scan">
+                    <span>⌕</span>
+                    New Scan
+                </button>
+
+                <button class="nav-item" data-page="history">
+                    <span>◷</span>
+                    Scan History
+                </button>
+
+                <button class="nav-item" data-page="reports">
+                    <span>▤</span>
+                    Reports
+                </button>
+
+                <button class="nav-item" data-page="rules">
+                    <span>⚖</span>
+                    Rules Library
+                </button>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <div class="system">
+                    <i></i>
+
+                    <div>
+                        <b>System Ready</b>
+                        <small>AI engine connected</small>
+                    </div>
+                </div>
+
+                <div class="profile">
+
+                    <div class="avatar">
+                        I
+                    </div>
+
+                    <div>
+                        <b>Inspector</b>
+                        <small>Field Officer</small>
+                    </div>
+
+                    <span>⋮</span>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main">
+
+            <!-- Header -->
+            <header>
+
+                <div>
+
+                    <p class="eyebrow">
+                        INSPECTION WORKSPACE
+                    </p>
+
+                    <h1>
+                        Product Compliance Scanner
+                    </h1>
+
+                </div>
+
+                <div class="header-actions">
+
+                    <button class="icon-btn">
+                        ?
+                    </button>
+
+                    <button class="outline-btn" id="historyBtn">
+                        Scan History
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- Scan Page -->
+            <section id="scanPage" class="page">
+
+                <!-- Stepper -->
+                <div class="stepper">
+
+                    <div class="step active">
+                        <b>01</b>
+                        <span>Capture</span>
+                    </div>
+
+                    <div class="line"></div>
+
+                    <div class="step">
+                        <b>02</b>
+                        <span>Analyze</span>
+                    </div>
+
+                    <div class="line"></div>
+
+                    <div class="step">
+                        <b>03</b>
+                        <span>Verify</span>
+                    </div>
+
+                    <div class="line"></div>
+
+                    <div class="step">
+                        <b>04</b>
+                        <span>Report</span>
+                    </div>
+
+                </div>
+
+
+                <!-- Workspace -->
+                <div class="workspace">
+
+                    <!-- Scanner -->
+                    <section class="scanner-card">
+
+                        <div class="card-head">
+
+                            <div>
+
+                                <h2>
+                                    Capture Product Label
+                                </h2>
+
+                                <p>
+                                    Scan the back panel or upload a clear label image.
+                                </p>
+
+                            </div>
+
+                            <span class="live-pill">
+                                <i></i>
+                                CAMERA READY
+                            </span>
+
+                        </div>
+
+
+                        <!-- Capture Area -->
+                        <div class="capture-area" id="captureArea">
+
+    <video
+        id="cameraVideo"
+        autoplay
+        playsinline
+        muted>
+    </video>
+
+    <div class="roi"></div>
+
+    <div class="camera-grid"></div>
+
+    <div class="scan-line"></div>
+
+    <div class="quality-indicator">
+        <span class="quality-dot"></span>
+        <span>Good lighting</span>
+    </div>
+
+                        <div id="burstStatus" class="burst-status"></div>
+
+                        <div id="burstFrames" style="display:none;"></div>
+
+</div>
+                        <!-- Controls -->
+                        <div class="capture-controls">
+
+                            <button class="upload-btn" id="uploadBtn">
+                                <span>↑</span>
+                                Upload Image
+                            </button>
+
+                           <input
+                                type="file"
+                                id="fileInput"
+                                accept="image/*"
+                                multiple
+                                hidden
+                            >
+
+                            <button class="capture-btn" id="captureBtn">
+                                📷 Hold to Capture
+                            </button>
+
+                            <button class="code-btn" id="codeBtn">
+                                ▦ Scan Barcode / QR
+                            </button>
+
+                        </div>
+
+                        <p class="formats">
+                            Supports JPG, PNG • Maximum 10 MB
+                        </p>
+
+                    </section>
+
+
+                    <!-- How It Works -->
+                    <aside class="info-card">
+
+                        <h3>
+                            How it works
+                        </h3>
+
+
+                        <div class="info-step">
+
+                            <b>01</b>
+
+                            <div>
+
+                                <strong>
+                                    Capture
+                                </strong>
+
+                                <p>
+                                    Camera burst or uploaded image
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-step">
+
+                            <b>02</b>
+
+                            <div>
+
+                                <strong>
+                                    Recover
+                                </strong>
+
+                                <p>
+                                    Sharpness, glare & perspective correction
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-step">
+
+                            <b>03</b>
+
+                            <div>
+
+                                <strong>
+                                    Read
+                                </strong>
+
+                                <p>
+                                    AI text detection and OCR extraction
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-step">
+
+                            <b>04</b>
+
+                            <div>
+
+                                <strong>
+                                    Verify
+                                </strong>
+
+                                <p>
+                                    Check applicable Legal Metrology rules
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="secure">
+
+                            <span>◉</span>
+
+                            <div>
+
+                                <b>
+                                    Inspection-grade workflow
+                                </b>
+
+                                <small>
+                                    Uncertain evidence is never treated as a violation.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </aside>
+
+                </div>
+
+
+                <!-- Recent Scans -->
+                <div class="recent">
+
+                    <div class="section-title">
+
+                        <div>
+
+                            <h2>
+                                Recent Scans
+                            </h2>
+
+                            <p>
+                                Your latest inspection records
+                            </p>
+
+                        </div>
+
+                        <button id="viewAll">
+                            View all →
+                        </button>
+
+                    </div>
+
+
+                    <div class="table-wrap">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>PRODUCT</th>
+                                    <th>DATE</th>
+                                    <th>RESULT</th>
+                                    <th>CONFIDENCE</th>
+                                    <th></th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="recentScansBody">
+
+                                <tr>
+
+                                    <td>
+                                        <b>
+                                            Premium Basmati Rice
+                                        </b>
+
+                                        <small>
+                                            8901234567890
+                                        </small>
+                                    </td>
+
+                                    <td>
+                                        Today, 11:42 AM
+                                    </td>
+
+                                    <td>
+                                        <span class="status pass">
+                                            ✓ Compliant
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        96%
+                                    </td>
+
+                                    <td>
+                                        →
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <b>
+                                            Instant Coffee
+                                        </b>
+
+                                        <small>
+                                            8909876543210
+                                        </small>
+                                    </td>
+
+                                    <td>
+                                        Yesterday, 04:18 PM
+                                    </td>
+
+                                    <td>
+                                        <span class="status warn">
+                                            ! Review
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        71%
+                                    </td>
+
+                                    <td>
+                                        →
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <b>
+                                            Washing Powder
+                                        </b>
+
+                                        <small>
+                                            8904561237891
+                                        </small>
+                                    </td>
+
+                                    <td>
+                                        Sep 03, 09:25 AM
+                                    </td>
+
+                                    <td>
+                                        <span class="status fail">
+                                            × Non-compliant
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        93%
+                                    </td>
+
+                                    <td>
+                                        →
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Analysis Page -->
+            <section id="analysisPage" class="page hidden">
+
+                <div class="analysis-head">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            AI INSPECTION
+                        </p>
+
+                        <h2>
+                            Analyzing Product Label
+                        </h2>
+
+                        <p id="analysisSub">
+                            Processing captured evidence...
+                        </p>
+
+                    </div>
+
+                    <span class="live-pill">
+                        ● PROCESSING
+                    </span>
+
+                </div>
+
+
+                <div class="analysis-grid">
+
+                    <div class="preview-card">
+
+                        <div class="preview-placeholder">
+
+                            <div class="focus-box">
+                                LABEL
+                            </div>
+
+                            <span>
+                                Captured image preview
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="pipeline-card">
+
+                        <div class="pipeline-row active">
+
+                            <span class="picon">
+                                01
+                            </span>
+
+                            <div>
+
+                                <b>
+                                    Image Recovery
+                                </b>
+
+                                <small>
+                                    Sharpness • glare • perspective
+                                </small>
+
+                            </div>
+
+                            <strong>
+                                ✓
+                            </strong>
+
+                        </div>
+
+
+                        <div class="pipeline-row active">
+
+                            <span class="picon">
+                                02
+                            </span>
+
+                            <div>
+
+                                <b>
+                                    Text Detection
+                                </b>
+
+                                <small>
+                                    DBNet region detection
+                                </small>
+
+                            </div>
+
+                            <strong>
+                                ✓
+                            </strong>
+
+                        </div>
+
+
+                        <div class="pipeline-row active">
+
+                            <span class="picon">
+                                03
+                            </span>
+
+                            <div>
+
+                                <b>
+                                    OCR & Extraction
+                                </b>
+
+                                <small>
+                                    Reading required declarations
+                                </small>
+
+                            </div>
+
+                            <strong id="ocrTick">
+                                …
+                            </strong>
+
+                        </div>
+
+
+                        <div class="pipeline-row">
+
+                            <span class="picon">
+                                04
+                            </span>
+
+                            <div>
+
+                                <b>
+                                    Completeness Verification
+                                </b>
+
+                                <small>
+                                    10 mandatory fields
+                                </small>
+
+                            </div>
+
+                            <strong>
+                                ○
+                            </strong>
+
+                        </div>
+
+
+                        <div class="pipeline-row">
+
+                            <span class="picon">
+                                05
+                            </span>
+
+                            <div>
+
+                                <b>
+                                    Rules Engine
+                                </b>
+
+                                <small>
+                                    Applicable LM(PC) checks
+                                </small>
+
+                            </div>
+
+                            <strong>
+                                ○
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress">
+
+                            <span id="progressBar"></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Result Page -->
+            <section id="resultPage" class="page hidden">
+
+                <div class="result-head">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            INSPECTION RESULT
+                        </p>
+
+                        <h2>
+                            Compliance Verification
+                        </h2>
+
+                        <p>
+                            Scan ID:
+                            <b>
+                                LM-2026-0905-0042
+                            </b>
+                            • Just now
+                        </p>
+
+                    </div>
+
+                    <button class="outline-btn" id="newScan">
+                        + New Scan
+                    </button>
+
+                </div>
+
+
+                <!-- Result Summary -->
+                <div class="result-summary">
+
+                    <div class="result-badge">
+
+                        <div class="big-check">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <span>
+                                OVERALL RESULT
+                            </span>
+
+                            <h2>
+                                Compliant
+                            </h2>
+
+                            <p>
+                                All confirmed applicable declarations passed.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <span>
+                            Confidence
+                        </span>
+
+                        <b>
+                            96%
+                        </b>
+
+                        <small>
+                            High confidence
+                        </small>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <span>
+                            Fields
+                        </span>
+
+                        <b>
+                            10/10
+                        </b>
+
+                        <small>
+                            Confirmed
+                        </small>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <span>
+                            Rules
+                        </span>
+
+                        <b>
+                            8/8
+                        </b>
+
+                        <small>
+                            Passed
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Result Columns -->
+                <div class="result-columns">
+
+                    <!-- Fields -->
+                    <div class="fields-card">
+
+                        <div class="section-title">
+
+                            <div>
+
+                                <h3>
+                                    Extracted Declarations
+                                </h3>
+
+                                <p>
+                                    Evidence-backed field values
+                                </p>
+
+                            </div>
+
+                            <button>
+                                View evidence
+                            </button>
+
+                        </div>
+
+
+                        <div class="field-grid">
+
+    <div>
+        <span>Product Name</span>
+        <b>Cadbury 5 Star Chocolate Bar</b>
+        <em>98%</em>
+    </div>
+
+    <div>
+        <span>Net Quantity</span>
+        <b>19.5 g</b>
+        <em>99%</em>
+    </div>
+
+    <div>
+        <span>MRP</span>
+        <b>₹ 20.00</b>
+        <em>99%</em>
+    </div>
+
+    <div>
+        <span>Manufacturing Date</span>
+        <b>08/2026</b>
+        <em>96%</em>
+    </div>
+
+    <div>
+        <span>Best Before</span>
+        <b>12 Months</b>
+        <em>95%</em>
+    </div>
+
+    <div>
+        <span>Manufacturer Address</span>
+        <b>Mondelez India Foods Private Limited, India</b>
+        <em>93%</em>
+    </div>
+
+    <div>
+        <span>Consumer Care</span>
+        <b>1800-22-0420</b>
+        <em>97%</em>
+    </div>
+
+    <div>
+        <span>Country of Origin</span>
+        <b>India</b>
+        <em>99%</em>
+    </div>
+
+    <div>
+        <span>LMPC / License</span>
+        <b>As printed on package</b>
+        <em>94%</em>
+    </div>
+
+    <div>
+        <span>Barcode / GTIN</span>
+        <b>As detected from package</b>
+        <em>99%</em>
+    </div>
+
+</div>
+
+                    <!-- Rules -->
+                    <div class="rules-card">
+
+                        <h3>
+                            Rules Verification
+                        </h3>
+
+                        <p>
+                            Applicable checks from Legal Metrology framework
+                        </p>
+
+
+                        <div class="rule pass">
+
+                            <span>
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <b>
+                                    Declarations present
+                                </b>
+
+                                <small>
+                                    Required information detected
+                                </small>
+
+                            </div>
+
+                            <strong>
+                                PASS
+                            </strong>
+
+                        </div>
+
+
+                        <div class="rule pass">
+
+                            <span>
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <b>
+                                    MRP declaration
+                                </b>
+
+                                <small>
+                                    ₹ symbol and tax-inclusive wording
+                                </small>
+
+                            </div>
+
+                            <strong>
+                                PASS
+                            </strong>
+
+                        </div>
+
+
+                        <div class="rule pass">
+
+                            <span>
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <b>
+                                    Net quantity
+                                </b>
+
+                                <small>
+                                    Value and unit detected
+                                </small>
+
+                            </div>
+
+                            <strong>
+                                PASS
+                            </strong>
+
+                        </div>
+
+
+                        <div class="rule pass">
+
+                            <span>
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <b>
+                                    Consumer care
+                                </b>
+
+                                <small>
+                                    Contact information detected
+                                </small>
+
+                            </div>
+
+                            <strong>
+                                PASS
+                            </strong>
+
+                        </div>
+
+
+                        <div class="rule pass">
+
+                            <span>
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <b>
+                                    Date logic
+                                </b>
+
+                                <small>
+                                    Manufacturing date is valid
+                                </small>
+
+                            </div>
+
+                            <strong>
+                                PASS
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Result Actions -->
+                <div class="result-actions">
+
+                    <button class="outline-btn">
+                        ↓ Export PDF
+                    </button>
+
+                    <button class="primary">
+                        ✓ Save Inspection
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- History Page -->
+            <section id="historyPage" class="page hidden">
+
+                <div class="result-head">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            RECORDS
+                        </p>
+
+                        <h2>
+                            Scan History
+                        </h2>
+
+                        <p>
+                            Previous inspection records and audit trail.
+                        </p>
+
+                    </div>
+
+                    <button class="primary" id="historyNew">
+                        + New Scan
+                    </button>
+
+                </div>
+
+
+                <div class="history-card">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>SCAN ID</th>
+                                <th>PRODUCT</th>
+                                <th>DATE</th>
+                                <th>RESULT</th>
+                                <th>CONF.</th>
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="historyTableBody">
+
+                            <tr>
+
+                                <td>
+                                    LM-2026-0905-0042
+                                </td>
+
+                                <td>
+                                    Premium Basmati Rice
+                                </td>
+
+                                <td>
+                                    Today, 11:42 AM
+                                </td>
+
+                                <td>
+                                    <span class="status pass">
+                                        ✓ Compliant
+                                    </span>
+                                </td>
+
+                                <td>
+                                    96%
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    LM-2026-0904-0039
+                                </td>
+
+                                <td>
+                                    Instant Coffee
+                                </td>
+
+                                <td>
+                                    Sep 04, 04:18 PM
+                                </td>
+
+                                <td>
+                                    <span class="status warn">
+                                        ! Review
+                                    </span>
+                                </td>
+
+                                <td>
+                                    71%
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    LM-2026-0903-0031
+                                </td>
+
+                                <td>
+                                    Washing Powder
+                                </td>
+
+                                <td>
+                                    Sep 03, 09:25 AM
+                                </td>
+
+                                <td>
+                                    <span class="status fail">
+                                        × Non-compliant
+                                    </span>
+                                </td>
+
+                                <td>
+                                    93%
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- Reports Page -->
+            <section id="reportsPage" class="page hidden">
+
+                <div class="empty-page">
+
+                    <div>
+                        ▤
+                    </div>
+
+                    <h2>
+                        Inspection Reports
+                    </h2>
+
+                    <p>
+                        Generate PDF evidence reports and Excel bulk exports after inspections.
+                    </p>
+
+                    <button class="primary" id="reportScan">
+                        Start New Inspection
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- Rules Page -->
+            <section id="rulesPage" class="page hidden">
+
+                <div class="empty-page">
+
+                    <div>
+                        ⚖
+                    </div>
+
+                    <h2>
+                        Rules Library
+                    </h2>
+
+                    <p>
+                        Frontend placeholder for applicable Legal Metrology
+                        (Packaged Commodities) rule mappings.
+                    </p>
+
+
+                    <div class="rule-tags">
+
+                        <span>
+                            Rule 6/7
+                        </span>
+
+                        <span>
+                            Rule 8
+                        </span>
+
+                        <span>
+                            Rule 15
+                        </span>
+
+                        <span>
+                            Rule 18
+                        </span>
+
+                        <span>
+                            Rule 27
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <div class="toast" id="toast"></div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
