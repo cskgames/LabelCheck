@@ -92,40 +92,65 @@ async function startCamera() {
 
         // Stop previous camera
         if (cameraStream) {
-            cameraStream.getTracks().forEach(track => track.stop());
+
+            cameraStream.getTracks().forEach(track => {
+                track.stop();
+            });
+
+            cameraStream = null;
         }
 
-        // Try rear camera first
-        cameraStream = await navigator.mediaDevices.getUserMedia({
-            video: {
-                facingMode: {
-                    ideal: "environment"
+
+        /*
+         * Mobile:
+         * environment = rear/back camera
+         *
+         * Desktop:
+         * browser will automatically use
+         * the available webcam.
+         */
+
+        cameraStream =
+            await navigator.mediaDevices.getUserMedia({
+
+                video: {
+                    facingMode: {
+                        ideal: "environment"
+                    },
+
+                    width: {
+                        ideal: 1920
+                    },
+
+                    height: {
+                        ideal: 1080
+                    }
                 },
-                width: {
-                    ideal: 1920
-                },
-                height: {
-                    ideal: 1080
-                }
-            },
-            audio: false
-        });
+
+                audio: false
+            });
+
 
         video.srcObject = cameraStream;
 
-        console.log("Rear camera started");
+        video.setAttribute("playsinline", "");
+        video.setAttribute("autoplay", "");
+        video.muted = true;
+
+        await video.play();
+
+        console.log("Camera started");
+
 
     } catch (error) {
 
         console.error("Camera error:", error);
 
-        showToast(
+        notify(
             "Camera access denied. Please allow camera permission."
         );
     }
 }
-
-
 /* =========================================================
    CAPTURE IMAGE FROM WEBCAM
    ========================================================= */
@@ -328,21 +353,63 @@ function sleep(ms) {
 
 function showBurstPreview() {
 
-    const preview =
-        document.querySelector(
-            ".preview-placeholder"
-        );
+    const captureArea =
+        document.getElementById("captureArea");
 
-    if (!preview || burstFrames.length === 0) {
+    if (!captureArea || burstFrames.length === 0) {
         return;
     }
 
-    preview.innerHTML = `
-        <img
-            class="uploaded-preview"
-            src="${burstFrames[burstFrames.length - 1]}"
-            alt="Captured product"
-        >
+    captureArea.innerHTML = `
+
+        <div class="burst-preview">
+
+            <div class="burst-header">
+
+                <strong>
+                    Captured ${burstFrames.length} Images
+                </strong>
+
+                <span>
+                    Frames for analysis
+                </span>
+
+            </div>
+
+            <div class="burst-images">
+
+                ${burstFrames.map((imageURL, index) => `
+
+                    <div class="burst-image-wrapper">
+
+                        <img
+                            src="${imageURL}"
+                            class="burst-image"
+                            alt="Captured frame ${index + 1}"
+                        >
+
+                        <span class="frame-number">
+                            ${index + 1}
+                        </span>
+
+                    </div>
+
+                `).join("")}
+
+            </div>
+
+        </div>
+
+        <div class="quality-indicator">
+
+            <span class="quality-dot"></span>
+
+            <span id="qualityText">
+                ${burstFrames.length} frames captured
+            </span>
+
+        </div>
+
     `;
 }
 
